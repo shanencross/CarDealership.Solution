@@ -19,6 +19,26 @@ namespace CarDealership.Models
       _instances.Add(this);
     }
 
+    public static List<Car> GetCarsWorthBuying(int maxPrice)
+    {
+      List<Car> carsWorthBuying = new List<Car> {};
+
+      foreach (Car car in _instances)
+      {
+        if (car.WorthBuying(maxPrice))
+        {
+          carsWorthBuying.Add(car);
+        }
+      }
+
+      return carsWorthBuying;
+    }
+
+    private bool WorthBuying(int maxPrice)
+    {
+      return (Price <= maxPrice);
+    }
+
     public static List<Car> GetAll()
     {
       return _instances;
